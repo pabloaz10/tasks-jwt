@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Tarefas - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title">📝 Gerenciador de Tarefas</h1>
+            <div class="nav-user">
+                <span>Olá, <%= user.name %>!</span>
+                <a href="/logout" class="btn btn-outline">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="tasks-header">
+            <h2>📋 Minhas Tarefas</h2>
+            <a href="/tasks/new" class="btn btn-primary">➕ Nova Tarefa</a>
+        </div>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <% if (tasks && tasks.length > 0) { %>
+            <div class="tasks-grid">
+                <% tasks.forEach(task => { %>
+                    <div class="task-card <%= task.completed ? 'completed' : '' %>">
+                        <div class="task-header">
+                            <h3 class="task-title"><%= task.title %></h3>
+                            <div class="task-status">
+                                <% if (task.completed) { %>
+                                    <span class="status-badge completed">✅ Concluída</span>
+                                <% } else { %>
+                                    <span class="status-badge pending">⏳ Pendente</span>
+                                <% } %>
+                            </div>
+                        </div>
+                        
+                        <% if (task.description) { %>
+                            <p class="task-description"><%= task.description %></p>
+                        <% } %>
+                        
+                        <div class="task-actions">
+                            <form action="/tasks/toggle/<%= task.id %>" method="POST" style="display: inline;">
+                                <% if (task.completed) { %>
+                                    <button type="submit" class="btn btn-secondary btn-sm">↩️ Reabrir</button>
+                                <% } else { %>
+                                    <button type="submit" class="btn btn-success btn-sm">✅ Completar</button>
+                                <% } %>
+                            </form>
+                            
+                            <a href="/tasks/edit/<%= task.id %>" class="btn btn-outline btn-sm">✏️ Editar</a>
+                            
+                            <form action="/tasks/delete/<%= task.id %>" method="POST" 
+                                  style="display: inline;" 
+                                  onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?')">
+                                <button type="submit" class="btn btn-danger btn-sm">🗑️ Excluir</button>
+                            </form>
+                        </div>
+                        
+                        <div class="task-meta">
+                            <small>Criada em: <%= new Date(task.createdAt).toLocaleDateString('pt-BR') %></small>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h3>Nenhuma tarefa encontrada</h3>
+                <p>Que tal começar criando sua primeira tarefa?</p>
+                <a href="/tasks/new" class="btn btn-primary">➕ Criar primeira tarefa</a>
+            </div>
+        <% } %>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Gerenciador de Tarefas - Sistema JWT</p>
+    </footer>
+</body>
+</html>

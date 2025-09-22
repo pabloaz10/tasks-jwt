@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tarefa - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title">📝 Gerenciador de Tarefas</h1>
+            <div class="nav-user">
+                <span>Olá, <%= user.name %>!</span>
+                <a href="/logout" class="btn btn-outline">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>✏️ Editar Tarefa</h2>
+                <a href="/tasks" class="btn btn-outline">⬅️ Voltar</a>
+            </div>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="alert alert-error">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form action="/tasks/edit/<%= task.id %>" method="POST" class="task-form">
+                <div class="form-group">
+                    <label for="title">Título da tarefa *</label>
+                    <input type="text" id="title" name="title" required 
+                           value="<%= task.title %>" 
+                           placeholder="Ex: Estudar para a prova de matemática">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descrição (opcional)</label>
+                    <textarea id="description" name="description" rows="4" 
+                              placeholder="Descreva os detalhes da sua tarefa..."><%= task.description || '' %></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="completed" <%= task.completed ? 'checked' : '' %>>
+                        <span class="checkbox-text">Marcar como concluída</span>
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">💾 Salvar Alterações</button>
+                    <a href="/tasks" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+
+            <div class="task-info">
+                <p><strong>Status atual:</strong> 
+                   <span class="status-badge <%= task.completed ? 'completed' : 'pending' %>">
+                       <%= task.completed ? '✅ Concluída' : '⏳ Pendente' %>
+                   </span>
+                </p>
+                <p><strong>Criada em:</strong> <%= new Date(task.createdAt).toLocaleDateString('pt-BR') %></p>
+                <% if (task.updatedAt && task.updatedAt !== task.createdAt) { %>
+                    <p><strong>Última atualização:</strong> <%= new Date(task.updatedAt).toLocaleDateString('pt-BR') %></p>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Gerenciador de Tarefas - Sistema JWT</p>
+    </footer>
+</body>
+</html>
