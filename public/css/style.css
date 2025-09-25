@@ -67,7 +67,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EEAECA 0%, #94BBE9 100%);
   color: white;
 }
 
@@ -77,17 +77,17 @@ body {
 }
 
 .btn-success {
-  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  background: #44c4b1;
   color: white;
 }
 
 .btn-success:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+  box-shadow: 0 5px 15px rgba(78, 205, 131, 0.4);
 }
 
 .btn-danger {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  background: #ff6b6b;
   color: white;
 }
 
@@ -125,6 +125,10 @@ body {
 .btn-full {
   width: 100%;
 }
+.btn-color {
+  background: #667eea;
+  color: black;
+} 
 
 /* Containers de autenticação */
 .auth-container {

@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <h1 class="nav-title">📝 Gerenciador de Tarefas</h1>
+            <h1 class="nav-title">Gerenciador de Tarefas</h1>
             <div class="nav-user">
                 <span>Olá, <%= user.name %>!</span>
                 <a href="/logout" class="btn btn-outline">Sair</a>
@@ -19,8 +19,8 @@
 
     <main class="main-content">
         <div class="tasks-header">
-            <h2>📋 Minhas Tarefas</h2>
-            <a href="/tasks/new" class="btn btn-primary">➕ Nova Tarefa</a>
+            <h2>Minhas Tarefas</h2>
+            <a href="/tasks/new" class="btn btn-primary">Nova Tarefa</a>
         </div>
 
         <% if (typeof error !== 'undefined' && error) { %>
@@ -57,7 +57,7 @@
                                 <% } %>
                             </form>
                             
-                            <a href="/tasks/edit/<%= task.id %>" class="btn btn-outline btn-sm">✏️ Editar</a>
+                            <a href="/tasks/edit/<%= task.id %>" class="btn btn-outline btn-sm btn-color">✏️ Editar</a>
                             
                             <form action="/tasks/delete/<%= task.id %>" method="POST" 
                                   style="display: inline;" 
